@@ -494,11 +494,11 @@ contract('ERC20', function ([_, owner, recipient, anotherAccount]) {
 
     describe('for a non null account', function () {
       it('rejects burning more than allowance', async function () {
-        await assertRevert(this.token.burnFrom(owner, allowance.plus(1)));
+        await assertRevert(this.token.burnFrom(owner, allowance.plus(1)), { from: spender });
       });
 
       it('rejects burning more than balance', async function () {
-        await assertRevert(this.token.burnFrom(owner, initialSupply.plus(1)));
+        await assertRevert(this.token.burnFrom(owner, initialSupply.plus(1)), { from: spender });
       });
 
       const describeBurnFrom = function (description, amount) {
